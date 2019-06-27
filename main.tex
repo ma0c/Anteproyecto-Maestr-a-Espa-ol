@@ -1,0 +1,53 @@
+\documentclass[a4paper,12pt,twoside]{report}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=3cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+
+
+\include{thesis.preamble}
+
+
+\begin{document}
+
+%\title{\LARGE {\bf Using hybrid techniques to improve performance on forced aligners for Spanish language}\\
+% \vspace*{6mm}
+%}
+
+\title{\LARGE {\bf Anotación automática de un corpus hablado de licencia abierta y larga duración para el lenguaje español}\\
+ \vspace*{6mm}
+}
+
+\author{Mauricio Collazos}
+\submitdate{December 2018}
+
+\normallinespacing
+\maketitle
+
+\preface
+\input{abstract/abstract}
+% \input{acknowledgements/acknowledgements}
+% \input{dedication/dedication}
+% \input{quotes/quotes}
+
+\body
+\input{introduction/introduction}
+% \input{background/background}
+
+% body of thesis comes here
+
+% \input{conclusion/conclusion}
+
+% \appendix
+% appendices come here
+
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{plain}
+% \bibliographystyle{apacite}
+% \bibliography{bibliography/bibliography}
+\bibliography{references.bib,custom_references.bib}
+
+
+
+
+\end{document}
