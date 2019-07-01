@@ -1,0 +1,85 @@
+
+
+
+\chapter{Estado del arte}
+% \section{State of the Art}
+
+\section{Breve historia de los ASR}
+% \subsection{A brief history}
+
+El ASR puede ser definido como el proceso mediante el cualo los computadores pueden interpretar señales habladas y producir la representación correspondiente. Este problema se ha atacado desde los años cincuenta, evolucionando desde filtros análigiso donde arreglos específicos de dispositivos físicos extraían información de la señal acústica evaluando frecuencias específicas y comparándolos con grandes bancos de datos \cite{Davis1952AutomaticDigits,Olson1957PhoneticTypewriter}. Esta primera aproximación dió grandes resultados pero poseía las restricciones de ser dependiente del locutor, lo que significa que solo reconoce señales de una sola persona.
+% ASR can be defined as the process where computers can interpret speech signals and produce the corresponding text representation. This problem has been addressed since the early fifties and has evolved from analog filters where arrays of specific hardware extract information from the acoustic signal evaluating specific frequencies, compare from a large data bank and output a result  \cite{Davis1952AutomaticDigits,Olson1957PhoneticTypewriter}. This first approach works with high accuracy but was speaker dependent, which means only can recognize words from a single speaker. 
+
+Aproximaciones más sofisticadas se producieron en los sesenta y setenta, donde se cambiaron los filtros análogos por digiltaes y la nosmalización del audio les permitió a los investigadores utilizar Procesamiento Digital de Señales (Digital Signal Processing DSP) y programación dimámica (Dinamic Programming DP) \cite{Velichko1970AutomaticWords,Sakoe1978DynamicRecognition,Itakura1975MinimumRecognition}. Con estas aproximaciones se logró obtener independencia de locutor y reconocimiento de pequeños vocabularios con palabras aisladas.
+% More sophisticated approaches were produce in the sixties and seventies where software filters and normalization let researchers work with Digital Signal Processing (DSP) and dynamic programming \cite{Velichko1970AutomaticWords,Sakoe1978DynamicRecognition,Itakura1975MinimumRecognition}, with those approaches speaker independent isolated word recognition with a high accuracy over a small controlled language.
+
+Incrementar el reconocimiento sobre el tamaño del vocabulario fue un problema atacado en la década d elos ochentas y noventas, donde las aproximaciones usando Modelos Ocultos de Markov tomaron mucha fuerza \cite{RabinerARecognition} y se convirtieron en las implementaciones estándares. Otras aproximaciones usando Redes Neuronales Artificiales resultaron menos efectivas \cite{Waibel1989PhonemeNetworks} pero igualmente usadas. Como resultado de la popularidad del problema y los buenos resultados obtenidos, se desarrollaron herramientas y aplicaciones como SPHINX de la Universidad Carnegie Mellon (CMU) \cite{Lee1990AnSystem}, BYBLOS \cite{ChowBYBLOS:System}, el Lincoln Robust Speech Recognizer \cite{PaulTheRecognizer} y el MIT Summit Speech Recognition System \cite{Zue1989TheReport}. La mayoría de estas herramientas usan Modelos Ocultos de Markov en combinación con Modelos de Mixturas Gausianas usando senones: una sub unidad finéntica la cual le permite a cada fonema tener varios estados de transición para luego ser agrupados en un modelo único.
+% Increasing the vocabulary size was a problem addressed in the eighties and nineties where approaches like Hidden Markov Models (HMM) \cite{RabinerARecognition} and Artificial Neural Networks (ANN) \cite{Waibel1989PhonemeNetworks} won popularity as methods to treat large vocabularies. A result of this popularity many software frameworks where develop like SPHINX by Carnegie Mellon University (CMU) \cite{Lee1990AnSystem}, BYBLOS \cite{ChowBYBLOS:System}, the Lincoln Robust Speech Recognizer \cite{PaulTheRecognizer} and the MIT Summit Speech Recognition System \cite{Zue1989TheReport}. Many of these systems use an HMM approach mixed with a Gaussian Mixture Models using Senones: a sub-phonetic unit which allows each phone sub model to share and cluster its state\cite{Hwang}.
+
+Todos estas herramientas ha mostrado grandes resultados en ambientes con reuido reducido, lo cual representa un nuevo reto: mejorar la precición en canales ruidosos, con lo que se inicia una nueva área de investigación denominada Reconocimiento del Habla Robusto (Robust Speech Recognition) \cite{SieglerOnSystems,MirghaforiTowardsASR}. El cual include investigacieon relacionada con el ancho de banda de la perceicpón del sonido y la creción de modulaciones a los espectrogramas de frecuencias para reducir la reverberación y la percepción del ruido \cite{Kingsbury1998RobustSpectrogram}, la segmentación del audio para la identificación de segmentos no confiagles usando marginalización y imputación de datos basado en estado y límites de energía \cite{Cooke2001RobustData} y aproximaciones hibridas  que mejoran la precisión usando combinaciones de Modelos Ocultos de Markov y Redes Neuronles Artificiales \cite{BourlardABands}.
+% All these framework shows great results on noise reduced environments, introducing a next challenge: improve accuracy on noisy channels, which starts the concept of Robust Speech Recognition \cite{SieglerOnSystems,MirghaforiTowardsASR}. Which includes research in reducing bandwidth of the sound perception and create a modulation spectrogram to reduce reverberation and noise perception \cite{Kingsbury1998RobustSpectrogram}, segment the audio wave and identify unreliable segments using marginalization and state-based data imputation combined with energy bounds which improved performance on noisy channels \cite{Cooke2001RobustData} and new hybrid approaches to improve performance combining existing HMM with ANN \cite{BourlardABands} to mention some relevant areas.
+
+La introducción de las Unidades de Procesamiento Gráfico (Graphical Unit Processors GPS) para acelerar los procesos de aprendizaje automático en clasificación de imágenes \cite{KrizhevskyImageNetNetworks} también impacto el ASR, dando un nuevo impulso a las técnicas hibridas y de redes neuronales, donde una aproximación que tomó mucha fuerza fue la de Redes Neuronales Profundas Dependientes de Contexto con Modelos Ocultos de Markov (Context-Dependent Deep Neural Network Hidden Markov Model CD-DNN-HMM) \cite{Yu_2014_1,Xiong2017}  y también aproxmiaciones que usan únicamente técnicas de aprendizaje profundo \cite{Povey_ASRU2011,1401.6984}.
+% Introduction of Graphical Unit Processors (GPU) to accelerate machine learning algorithms for Image Classification \cite{KrizhevskyImageNetNetworks} also impact ASR, giving a new a rise of hybrid techniques using Context-Dependent Deep Neural Network Hidden Markov Model (CD-DNN-HMM) \cite{Yu_2014_1,Xiong2017} and also new frameworks based on Deep Learning techniques \cite{Povey_ASRU2011,1401.6984}.
+
+%  El estado del arte, es una revisión de literatura (Internet, libros, revistas,etc) que permite identificar que otros trabajos similares hay en el área, o cuál es el borde del conocimiento que nos permite realizar la propuesta. Esta sección no debe superar una hoja. Tome lo desarrollado previamente y haga una sintesis.
+
+\section{Herramientas existentes}
+% \section{Existing tools}
+
+Muchos Alineadores Forzados de código abierto utilizan investigación teórica para materializar la alineación de recursos existentes. Basada en la categorización mencionada previamente, se agrupan alineadores existentes en las siguientes categorías
+
+\begin{itemize}
+    \item Pliegues Dinámicos Temporales
+    \item Modelos Ocultos de Markov
+    \item Redes Neuronales Artificiales
+\end{itemize}
+% Open source forced aligners uses theoretical research to create tools to materialize alignment on existing resources. Based on previously mentioned categorization the existing aligners are grouped in the categories: Dynamic Time Warping, Hidden Markov Models and Artifical Neural Networks.
+
+\subsection{Pliegues Dinámicos Temporales}
+% \subsection{Dynamic Time Warping}
+
+Para DTW la idea principal es generar señales de voz artificiales utilizando software de tipo grafema a fonema, también conocido como texto a vos (Text To Speech TTS), y luego aliear la señal de entrada con la generada artificialmente.
+
+% For DTW the main idea is to generate an artificial speech using Grapheme to Phoneme  software and then align the input speech with the artificially generated wave
+
+\textbf{Aeneas}.
+
+Aneneas \cite{aeneas} es un software desarrollado por Alberto Pettarin para Read Beyond, un software de audio libros, liberado bajo licencia GNU Affero General Public Licence versión 3 (AGPL v3) en 2015, con varias actualizaciones hasta 2017. Para la generación de la señal artificial, Aeneas usa eSpeak \cite{espeak}, otro software licenciado bajo la licencia GNU Public Licence (GPL) por the Free Software Foundation. eSpeak en su versión original soporta mas de 28 lenguajes, incluyendo Inglés y Español
+% Aeneas \cite{aeneas} uses espeak \cite{espeak} to generate the base generates speech wave. Then align the input word using dynamic programming.
+
+\subsection{Modelos Ocultos de Markov}
+% \subsection{Hidden Markov Models}
+
+Los Modelos Ocultos de Markov usan una serie de algoritmos para parametrizar los modelos, entre los cuales se destagan el algoritmo de Viterbi para la decodificación \cite{Forney1973TheAlgorithm} y el algoritmo Baum-Welch para la estimación inicial de parámetros.
+
+Este conjunto de algoritmos son implementados por paquetes especializados para el reconocimiento automático del habla, como  HTK \cite{Young1994ThePhilosophy}, Julius \cite{LeeEurospeechEngine} y CMU Sphinx \cite{Lee1990AnSystem}. Estas implementaciones abiertas de algoritmos son usadas por algunas herramientas mostradas a continuación.
+% Work with HMM uses a basic set of algorithms where the Viterbi algorithm \cite{Forney1973TheAlgorithm} and the Baum Welch Algorithm. These set of algorithms are implemented for ASR in frameworks and toolkits like HTK \cite{Young1994ThePhilosophy}, Julius \cite{LeeEurospeechEngine} and CMU Sphinx \cite{Lee1990AnSystem}.
+
+\textbf{MAUS}
+El Segmentador Automático de Munich (Munich AUtomatic Segmentation) desarrollado por el Instituto de Fonética y procesamiento de señales de la Universidad de Munich está construido usando herramientas de decodificación de HTK y BALLON un sistema de grafemas a fonemas también desarrollado por la  universidad de Munich. Este paquete fue desarrollado en 1994 por Uwe Reichel y Florian Schiel licenciado para propósitos no comerciales y académicos. \cite{WesenickAPPLYINGPRONUNCIATION}. 
+% The Munich Automatic Segmentation \cite{WesenickAPPLYINGPRONUNCIATION} is a build on top of HTK and BALLON a Grapheme to Phoneme Suite created by Uwe Reichel and uses a hybrid approach between DTW and HMM
+
+\textbf{SPPAS}
+SPPAS es un anotador automático y analizador de habla es una herramienta de computación científica desarrollada para proveer un análisis fonético robusto y confiagle \cite{Bigi2016ASPPAS}. Fue creada por Brigitte Bigi  en el Laboratorio del habla y la lengua (Laboratoire Parole et Langage) de Francia, licenciado con la licencia GPL v3, utiliza Julius para el procesamiento de los Modelos Ocultos de Markov.
+% SPPAS \cite{Bigi2016ASPPAS} is a suite for automated for automated annotation and speech analysis created by Brigitte Bigi at Laboratoire Parole et Langage in France and uses Julius for HMM processing and Viterbi Algorithm
+
+\textbf{Prosodylab Aligner}
+Prosodylab Aligner \cite{Gorman2011Prosodylab-aligner:Speech} fue creado en el Laboratorio de Prosodia (Prosody Lab) en la Universidad de Mcgill en Canada, por Kyle Gorman y está compuesta de una serie de herramientas y scripts para crear alineaciones usando HTK cusando monófnos para entrenar sus modelos.
+% Prosodylab Aligner \cite{Gorman2011Prosodylab-aligner:Speech} was created at Prosody Lab in Mcgill University by Kyle Gorman and are composed by a set of tools of scripts to create alignment using HTK as backend using mono-phones to train its models
+
+\subsection{Redes Neuronales Artificiales}
+% \subsection{Artificial Neural Networks}
+
+Los anotadores de código abierto basados en redes neuronales utilizan Kaldi \cite{Povey_ASRU2011}, un paquete diseñado por Daniel Povey en el instituto universitario John Hopkings, y licenciado bajo la licencia Apache 2.
+% For ANN the Kaldi toolkit \cite{Povey_ASRU2011} is used to improve development times.   
+
+\textbf{Gentle Forced Aligner}
+
+Gentle \cite{gentle} es un alineador forzado construido a partir de un modelo de bigramas y conceptos de programación dinámica para alienar el audio.
+% Gentle \cite{gentle} is a FA build on top of Kaldi. The main approach is to use a web server to evaluate an input speech. The model uses dynamic programming to align audio using a bigram model
+
+\textbf{The Montreal Forced Aligner}
+
+El Alineador Forzado de Montreal, fue creado en la Universidad de Mcgill en el laboratorio de prosidia \cite{McAuliffe2017MontrealKaldi}, licenciado con la licencia MIT  como una versión mejorada de Prosylab Aligner, utilizando el corpus GlobalPhone  para crear modelos trifónicos que mejoran el rendimiento con respecto al alineador anterior.
+% The Montreal Forced Aligner \cite{McAuliffe2017MontrealKaldi} was created at Prosody Lab in Mcgill University as the evolution for Prosodylab Aligner. It uses Kaldi as backend and Globalphone to create a triphone model that improves performance comparing Prosodylab Aligner
