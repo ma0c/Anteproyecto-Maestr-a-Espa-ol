@@ -7,32 +7,32 @@
 El reconocimiento automático del habla (Automatic Speech Recognition ASR) es un campo de la Inteligencia Artificial estudiado desde los años 50 con el objetivo de que los ordenadores entendieran el lenguaje natural hablado humano. Las primeras aproximaciones se hicieron reconociendo dígitos \cite{Davis1952AutomaticDigits}, y en la actualidad tenemos reconocedores capaces de reconocer grandes vocabularios como Google Home \cite{Li2017}, Microsoft Cortana \cite{Xiong2017} y muchos otros asistentes personales.
 % Automatic Speech recognition (ASR) is a subfield of Artificial Intelligence (AI) studied since the early fifties recognizing single digits \cite{Davis1952AutomaticDigits}, to large vocabulary recognizer included in Google Home \cite{Li2017}, Microsoft Cortana \cite{Xiong2017}, and many others Intelligent personal assistants.
 
-Las cadenas ocultas de Markov (Hidden Markov Models HMM) \cite{RabinerARecognition,PaulTheRecognizer,Zue1989TheReport} y las redes neuronales artificiales (Artificial Neural Networks ANN) \cite{Waibel1989PhonemeNetworks,XuedongHuangAlexAceroHsiao-WuenHon201,Hwang} han mostrado grandes resultados en la tarea del reconocimiento automático del habla, pero grandes cantidades de datos son necesarias. El incremento de la cantidad de los datos aumenta la precisión de los modelos, medidos usualmente como la proporción de error en palabras (Word Error Rate WER), como muestró Roger K. Moore en su artículo para InterSpeech 2003
+Las cadenas ocultas de Markov (Hidden Markov Models HMM) \cite{RabinerARecognition,PaulTheRecognizer,Zue1989TheReport} y las redes neuronales artificiales (Artificial Neural Networks ANN) \cite{Waibel1989PhonemeNetworks,XuedongHuangAlexAceroHsiao-WuenHon201,Hwang} han mostrado grandes resultados en la tarea del reconocimiento automático del habla, pero grandes cantidades de datos son necesarias. El incremento de la cantidad de los datos aumenta la precisión de los modelos, medidos usualmente como la proporción de error en palabras (Word Error Rate WER), como mostró Roger K. Moore en su artículo para InterSpeech 2003 
 % Hidden Markov Models (HMM) \cite{RabinerARecognition,PaulTheRecognizer,Zue1989TheReport} and Artificial Neural Networks (ANN) \cite{Waibel1989PhonemeNetworks,XuedongHuangAlexAceroHsiao-WuenHon201,Hwang} have proven great results on ASR tasks, however, large amounts of data are required. Increasing  training data can improve the Word Error Rate (WER) as shown in Roger K. Moore InterSpeech 2003 Article \cite{MooreAListeners}.
 
 Para el idioma inglés, corpus anotados y hablados de larga duración y gran vocabulario están disponibles y son usados para diversos estudios, los mas populares son FISHER \cite{CieriTheSpeech-to-Text} y Libri-Speech  \cite{PanayotovLIBRISPEECH:BOOKS}  los cuales cuentan con mas de 1000 horas de habla anotada, dando a los investigadores suficiente información para entrenar modelos con bajos WER \cite{HannunDeepRecognition}.
 % For the English language, large vocabulary-long duration annotated speech corpora are available and used in several studies. Popular corpus like FISHER \cite{CieriTheSpeech-to-Text} and Libri-Speech  \cite{PanayotovLIBRISPEECH:BOOKS}  has over 1000 hours of annotated speech giving researches enough data to train largest models with WER \cite{HannunDeepRecognition}.
 
-Por otro lado, para el idioma español, los recursos disponibles como CALLHOME \cite{CALLHOMESpa}, CALLFRIEND  \cite{CALLFRIENDSpa}, Voxforge \cite{Voxforge.org}, y CIEMPIESS \cite{Hernandez-MenaCIEMPIESS:Corpus} tienen menos de 100 horas cada uno, y estudios similares muestran WER significatibamente altos \cite{Hernandez-Mena2017AutomaticResources}.
+Por otro lado, para la lengua española, los recursos disponibles como CALLHOME \cite{CALLHOMESpa}, CALLFRIEND  \cite{CALLFRIENDSpa}, Voxforge \cite{Voxforge.org}, y CIEMPIESS \cite{Hernandez-MenaCIEMPIESS:Corpus} tienen menos de 100 horas cada uno, y estudios similares muestran WER significatibamente altos \cite{Hernandez-Mena2017AutomaticResources}.
 % On the other hand, for the Spanish language corpora are considerable small where popular corpora like CALLHOME \cite{CALLHOMESpa}, CALLFRIEND  \cite{CALLFRIENDSpa}, Voxforge \cite{Voxforge.org}, and CIEMPIESS \cite{Hernandez-MenaCIEMPIESS:Corpus} had less than 100 hours each and where WER is considerably higher \cite{Hernandez-Mena2017AutomaticResources}
 
-Por otro lado existen grandes bases de datos abiertas de audio libros para el idioma español, las cuales no tienen un nivel de anotación adecuado para realizar investigación en reconocimiento automático de voz, pero cuentan con las caracterísiticas necesarias para aumentar el nivel de anotación usando técnicas de alineamiento forzado (Forced Alignment FA). 
+Por otro lado existen grandes bases de datos abiertas de audio libros para la lengua española, las cuales no tienen un nivel de anotación adecuado para realizar investigación en reconocimiento automático de voz, pero cuentan con las caracterísiticas necesarias para aumentar el nivel de anotación usando técnicas de alineamiento forzado (Forced Alignment FA). 
 % There are open audio resources for the Spanish language, are not annotated or the level of annotation is not segmented enough. The process of define the time intervals where a unit of speech is spoken in a speech audio given the transcription is called Forced Alignment (FA)
 
-El objetivo principal de este proyecto es crear un alineador forzado que anote una de estas bases de datos de licencia abierta para el lenguaje español.
+El objetivo principal de este proyecto es diseñar e implementar un alineador forzado que anote una de estas bases de datos de licencia abierta para el lenguaje español.
 % The main objective of this project is to create a FA that can annotates a large duration-open sourced Spanish speech corpora.
 
 \section{Justificación}
 % \section{Justification}
 
-La precisión de un reconocedor automático incrementa con la cantidad de datos utilizados para el entrenamiento \cite{MooreAListeners}. Estos datos deben tener una anotación, es decir una relación entre señal de habla y representación. Las representaciones se hacen a nivel de expresión, palabra o fonema, siendo la segmentación a nivel de expresiones suficiente en la mayoría de los casos. La mayoría de investigación académica usa el idioma Inglés como línea base para sus investigaciones usando algunos de los corpus anotados mostrados en la tabla \ref{tab:english_corpora}, por otro lado, los recursos para el idioma Español se muestran en la tabla \ref{tab:spanish_corpora} donde se evidencia la diferencia entre los tamaños de los datos.
+La precisión de un reconocedor automático incrementa con la cantidad de datos utilizados para el entrenamiento \cite{MooreAListeners}. Estos datos deben tener una anotación, es decir una relación entre señal de habla y representación. Las representaciones se hacen a nivel de expresión, palabra o fonema, siendo la segmentación a nivel de expresiones suficiente en la mayoría de los casos. La mayoría de investigación académica usa el idioma Inglés como línea base para sus investigaciones usando algunos de los corpus anotados mostrados en la tabla \ref{tab:english_corpora}, por otro lado, los recursos para la lengua española se muestran en la tabla \ref{tab:spanish_corpora} donde se evidencia la diferencia entre los tamaños de los datos.
 
 % The accuracy of Speech Recognizer models increases with more data to train \cite{MooreAListeners}, optimal data must be annotated and segmented in small amounts where phonetic level segmentation are ideal, but words and utterances segmentation are enough in most cases.  Most academic research uses the English language as the baseline for testing recognizers, having multiples corpora annotated at utterance level to validate their models as shown in table \ref{tab:english_corpora}, on the other hand, resources for the Spanish languages are limited having at much fewer resources to train models as shown in table \ref{tab:spanish_corpora}.
 
-\input{introduction/table_corpora_english.tex}
-\input{introduction/table_corpora_spanish.tex}
+\input{01_introduction/table_corpora_english.tex}
+\input{01_introduction/table_corpora_spanish.tex}
 
-Aunque la brecha entre los lenguajes español e inglés es muy amplia, el lenguaje español no se considera un lenguaje con escasos recursos, pues existen múltiples corpus, bancos de árboles, datos anotados y transcritos, diccionarios y gramáticas formales \cite{CavarGlobalGORILLA}. Un gran recurso anotado disponible para el idioma español es la base de datos LibriVox  \cite{LibriVox}, la cual está basada en el proyecto Gutenberg \cite{gutenberg} y cuenta con mas de 400 audiolibros publicados bajo licencias abiertas. Un gran recurso creado por David Povey es llamado Libri Speech \cite{PanayotovLIBRISPEECH:BOOKS} el cual usa el proyecto Librvox con textos en idioma inglés como base y aumenta su nivel de anotación, dejando también esta anotación con licencia abierta.
+Aunque la brecha entre los lenguajes español e inglés es muy amplia, el lenguaje español no se considera un lenguaje con escasos recursos, pues existen múltiples corpus, bancos de árboles, datos anotados y transcritos, diccionarios y gramáticas formales \cite{CavarGlobalGORILLA}. Un gran recurso anotado disponible para la lengua española es la base de datos LibriVox  \cite{LibriVox}, la cual está basada en el proyecto Gutenberg \cite{gutenberg} y cuenta con mas de 400 audiolibros publicados bajo licencias abiertas. Un gran recurso creado por David Povey es llamado Libri Speech \cite{PanayotovLIBRISPEECH:BOOKS} el cual usa el proyecto Librvox con textos en idioma inglés como base y aumenta su nivel de anotación, dejando también esta anotación con licencia abierta.
 % Although the gap between both languages, Spanish aren't considered an under resource language because it has corpora, treebanks, transcribed and annotated speech data, and just dictionaries and formal grammars  \cite{CavarGlobalGORILLA}. Speech annotated open resources are available for the Spanish language, and a big database is LibriVox \cite{LibriVox}, this is based on project Gutenberg \cite{gutenberg} and have more than 400 audiobooks published under public licenses. A large corpus created by David Povey and called Libri Speech \cite{PanayotovLIBRISPEECH:BOOKS} is based on Librivox project and also available with open licences.
 
 Usando recursos de licencia abierta para el lenguaje español y mejorando su nivel de anotación permite que la comunidad entera de investigación de lenguaje hablado en español se beneficie, creando recursos de gran vocabulario y larga duración para posteriores investigaciones.
@@ -61,7 +61,7 @@ Generar automáticamente un corpus para el lenguaje español de gran vocabulario
     % \item To compare and extract relevant features of existing forced aligners
     \item Diseñar e implementar un alineador forzado que mejore el nivel de anotación de un corpus de gran vocabulario y larga duración.
     % \item To design and implement a forced aligner that annotates a large duration Spanish speech corpora
-    \item Mejorar el nivel de anotación de un corpus de gran vocabulario y larga duración para el idioma español.
+    \item Mejorar el nivel de anotación de un corpus de gran vocabulario y larga duración para la lengua española.
     % \item To annotate a large duration-open sourced Spanish speech corpora
 
 \end{itemize}
@@ -79,25 +79,6 @@ Generar automáticamente un corpus para el lenguaje español de gran vocabulario
 % que permiten evaluar el proyecto.
 
 
-\section{Metodología}
-% \section{Methodology}
-
-Para lograr cada objetivo específico, se inicia con una exploración a la literatura académica de publicaciones relacionada con alineadores forzados y sus aplicaciones para mejorar el nivel de anotación de corpus hablados, estudiando los principios propuestos, implementación y relevancia en el presente.
-% To accomplish each one specific objectives, we starts with a literature exploration of academic publications searching for existing forced aligner, its core principles, implementations, and relevance over the time.
-
-
-Simultáneamente se recolectarán recursos de licencias abiertas anotados en un nivel apropiado para evaluar el desempeño de los alineadores forzados, diseñando un corpus de prueba fonéticamente balanceado para el idioma español.
-% Simultaneously it will be collected a set of resources to measure the performance of existing forced aligners, designing a balanced phonetically segmented corpus for the Spanish language.
-
-Usando conceptos clave de los alineadores mas precisos, se diseñará y construirá un alineador forzado optimizado para el idioma español el cual pueda mejorar el nivel de alineación de los recursos abiertos seleccionados.
-% Using core concepts from the most accurate aligners, a new aligner will be designed and built which can annotates the selected corpora.
-
-Se liberará bajo licencias abiertas el corpus generado dejando también el alineador abierto para futuras investigaciones.
-% Annotating and open sourcing the annotation of the corpora for future work.
-
-% La metodología debe presentar en forma organizada, cómo será alcanzado cada uno de los
-% objetivos específicos. La metodología debe reflejar una estructura lógica para desarrollar el proyecto, deben estar detallados los procedimientos, técnicas, actividades y demás estrategias para alcanzar los objetivos. Debe mostrar de forma clara el proceso de recolección de
-% información o de requisitos, así como en la organización, sistematización y análisis. De igual forma, las elecciones para el desarrollo del proyecto tales como el lenguaje de modelado o el lenguaje de programación. Si utiliza una metodología estándar descríbala claramente, utilice algunas referencias bibliográficas de la metodología utilizada.
 
 
 \section{Resultados esperados}
@@ -111,9 +92,9 @@ Se espera obtener los siguientes resultados de esta tesis:
     % \item A detailed analysis of forced aligners its performance on English and Spanish languages
     \item Un corpus de prueba en español para medir la precisión de un alineador forzado.
     % \item A test corpora in Spanish to measure the precision of forced aligners
-    \item Un nuevo alineador forzado optimizado para el idioma español.
+    \item Un nuevo alineador forzado optimizado para la lengua española.
     % \item A newly forced aligner optimized for Spanish language
-    \item Un corpus de gran vocabulario y larga duración anotado a nivel de declaración para el idioma español.
+    \item Un corpus de gran vocabulario y larga duración anotado a nivel de declaración para la lengua española.
     % \item An annotation of a large duration-open sourced Spanish speech corpora
 \end{itemize}
 
