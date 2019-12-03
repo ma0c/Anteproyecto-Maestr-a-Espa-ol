@@ -1,6 +1,3 @@
-
-
-
 \chapter{Estado del arte}
 % \section{State of the Art}
 
@@ -83,3 +80,27 @@ Gentle \cite{gentle} es un alineador forzado construido a partir de un modelo de
 
 El Alineador Forzado de Montreal, fue creado en la Universidad de Mcgill en el laboratorio de prosidia \cite{McAuliffe2017MontrealKaldi}, licenciado con la licencia MIT  como una versión mejorada de Prosylab Aligner, utilizando el corpus GlobalPhone  para crear modelos trifónicos que mejoran el rendimiento con respecto al alineador anterior.
 % The Montreal Forced Aligner \cite{McAuliffe2017MontrealKaldi} was created at Prosody Lab in Mcgill University as the evolution for Prosodylab Aligner. It uses Kaldi as backend and Globalphone to create a triphone model that improves performance comparing Prosodylab Aligner
+
+\section{Trabajos similares}
+
+En el año 2015, en el Centro del lenguaje, reconocimiento de voz (Center for Language and Speech Processing) y el Centro de excelencia de tecnología y lenguaje humano (Human Language Technology Center of Excellence), los investigadores Vassil Panayotov, Gouoguo Chen, Daniel Povey y sanjeev Khudanpur dieron a conocer su trabajo de anotación de un corpus de larga duración, gran vocabulario e independiente de locutor basado en grabaciones de dominio público dándole el nombre de LibriSpeech \cite{PanayotovLIBRISPEECH:BOOKS}, pues las grabaciones fueron tomadas del proyecto LibriVox, el cual colecta grabaciones de locutores que ceden sus grabaciones bajo licencias abiertas de obras literarias de licencia abierta u obras de producción que también se ceden al dominio público bajo el proyecto Gutember \cite{gutenberg}.
+
+El proyecto dio como resultado un corpus de 1000 horas con audios a 16kHz disponible bajo la licencia Creative Commons 4.0, el cual se puede descargar desde un repositorio abierto llamado OpenSLR \cite{openSLR}, donde también se recolectan otros recursos abiertos para el procesamiento de voz, donde en su mayoría los recursos son para la lengua inglesa.
+
+\subsection{Alineación}
+
+Para la alineación de este corpus, se utilizaron las técnicas descritas por Timothy J Hazen en su presentación para InterSpeech 2006 \cite{HazenAutomatic}, donde se realiza una normalización del texto colocando todo en mayúsculas, removiendo la puntuación y removiendo las palabras no estándares, seguido de una creación de un modelo de bigramas para luego utilizar un decodificador que usa llamado Boosted MMI, propuesto por Povey \cite{PoveyBOOSTEDTRAINING} el cual utiliza coeficientes MFCC, seguido de Análisis Discriminatorio Lineal (LDA) y una transformada semi atada de covarianzas.
+
+Con esta transformación del texto, se realiza una primera alineación, donde utilizando el algoritmo de Smith-Waterman \cite{Smite1981IdentificationSubsequences} se determina la secuencia mas larga del libro. A partir de esto, se realiza una eliminación de segmentos del audio ruidosos y en los segmentos no ruidosos, se realiza una partición de máximo 35 segundos, tomando como marcador de separación intervalos de silencio superiores a medio segundo.
+
+Posteriormente se realiza una segunda alineación creando una caracterización del locutor usando vectores-i \cite{Dehak2011} generando un modelo acústico de bigramas y comparándolo con el modelo de bigramas de la fase de procesamiento de texto, para detectar anomalías de tipo adición o eliminación.
+
+Una vez identificadas las anomalías, se discriminan estos segmentos del resultado final y se realiza un tercer alineamiento esta vez utilizando un marcador de silencio de 0.3 segundos.
+
+\subsection{Selección de los datos}
+
+Dadas las características del proceso de alineación y la dependencia de cada libro de tener un solo locutor, se seleccionaron únicamente libros los cuales no tuvieran contenido dramático, para evitar que características prosódicas de este tipo particular de texto, como las exaltaciones y variaciones de timbre, afectaran los resultados. También se realizó validación de que los audios correspondientes al libro en cuestión pertenecieran a una única cuenta, intentando reducir los locutores múltiples por libro.
+
+También, posterior a la anotación automática, se realizó una validación manual de alto nivel, garantizando de esta manera el buen estado de la alineación.
+
+Por último, en el resultado final, se procuró que los audios anotados que contenían el corpus final tuvieran un balance de género, entregando el corpus en tres segmentos, el primero de 100 horas, el segundo de 360 horas y el último de 500 horas.
