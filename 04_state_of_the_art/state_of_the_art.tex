@@ -83,13 +83,16 @@ El Alineador Forzado de Montreal, fue creado en la Universidad de Mcgill en el l
 
 \section{Trabajos similares}
 
-Para el desarrollo del presente trabajo, se destacan como base los trabajos realizados por 
+Para el desarrollo del presente trabajo, se destacan como base los trabajos realizados por investigadores de la Universidad John Hopkins por la anotación de un corpus de larga duración y gran vocabulario llamado LibriSpeech \cite{PanayotovLIBRISPEECH:BOOKS} y trabajos en la Universidad McGuill con la creación del Montreal Forced Aligner (MFA) \cite{McAuliffe2017MontrealKaldi}.
+
+\subsection{LibriSpeech}
+
 
 En el año 2015, en el Centro del lenguaje, reconocimiento de voz (Center for Language and Speech Processing) y el Centro de excelencia de tecnología y lenguaje humano (Human Language Technology Center of Excellence), los investigadores Vassil Panayotov, Gouoguo Chen, Daniel Povey y sanjeev Khudanpur dieron a conocer su trabajo de anotación de un corpus de larga duración, gran vocabulario e independiente de locutor basado en grabaciones de dominio público dándole el nombre de LibriSpeech \cite{PanayotovLIBRISPEECH:BOOKS}, pues las grabaciones fueron tomadas del proyecto LibriVox, el cual colecta grabaciones de locutores que ceden sus grabaciones bajo licencias abiertas de obras literarias de licencia abierta u obras de producción que también se ceden al dominio público bajo el proyecto Gutember \cite{gutenberg}.
 
 El proyecto dio como resultado un corpus de 1000 horas con audios a 16kHz disponible bajo la licencia Creative Commons 4.0, el cual se puede descargar desde un repositorio abierto llamado OpenSLR \cite{openSLR}, donde también se recolectan otros recursos abiertos para el procesamiento de voz, donde en su mayoría los recursos son para la lengua inglesa.
 
-\subsection{Alineación}
+\textbf{Alineación}
 
 Para la alineación de este corpus, se utilizaron las técnicas descritas por Timothy J Hazen en su presentación para InterSpeech 2006 \cite{HazenAutomatic}, donde se realiza una normalización del texto colocando todo en mayúsculas, removiendo la puntuación y removiendo las palabras no estándares, seguido de una creación de un modelo de bigramas para luego utilizar un decodificador que usa llamado Boosted MMI, propuesto por Povey \cite{PoveyBOOSTEDTRAINING} el cual utiliza coeficientes MFCC, seguido de Análisis Discriminatorio Lineal (LDA) y una transformada semi atada de covarianzas.
 
@@ -99,10 +102,32 @@ Posteriormente se realiza una segunda alineación creando una caracterización d
 
 Una vez identificadas las anomalías, se discriminan estos segmentos del resultado final y se realiza un tercer alineamiento esta vez utilizando un marcador de silencio de 0.3 segundos.
 
-\subsection{Selección de los datos}
+\textbf{Selección de los datos}
 
 Dadas las características del proceso de alineación y la dependencia de cada libro de tener un solo locutor, se seleccionaron únicamente libros los cuales no tuvieran contenido dramático, para evitar que características prosódicas de este tipo particular de texto, como las exaltaciones y variaciones de timbre, afectaran los resultados. También se realizó validación de que los audios correspondientes al libro en cuestión pertenecieran a una única cuenta, intentando reducir los locutores múltiples por libro.
 
 También, posterior a la anotación automática, se realizó una validación manual de alto nivel, garantizando de esta manera el buen estado de la alineación.
 
 Por último, en el resultado final, se procuró que los audios anotados que contenían el corpus final tuvieran un balance de género, entregando el corpus en tres segmentos, el primero de 100 horas, el segundo de 360 horas y el último de 500 horas.
+
+
+\subsection{Montreal Forced Aligner}
+
+
+
+El alineador forzado de Montreal (Montreal Forced Aligner) se creó con el objetivo de mejorar un alineador creado en el 2011 llamado Prosodylab Aligner \cite{Gorman2011Prosodylab-aligner:Speech}. La principal diferencia es el motor de modelos de Markov, cambiando de HTK a Kaldi el cual ofrece ventajas de paralelismo para el entrenamiento de modelos de gran tamaño. De igual manera la licencia de Kaldi permite la distribución de todo el software de manera libre, en tanto que HTK al ser distribuido bajo licencia no puede ser empaquetado en la misma distribución.
+
+\textbf{Método de alineación}
+
+Al igual que su predecesor, el MFA utiliza Modelos Ocultos de Markov con Mixturas Gausianas (HMM/GMM) y Coeficientes Cepstrales de Mel (MFCC) utilizando los primeros 13 valores, sus derivadas y derivadas dobles con ventanas de 25 milisegundos y variaciones de 10 milisegundos.
+
+
+El proceso de alineación inicia con el entrenamiento de monófonos, realizando 40 iteraciones para el modelo inicial, seguido de 20 iteraciones para la realienación. Seguidamente se genera un modelo de trífonos utilizando 35 iteraciones y 15 para el realineamiento. Por último se hace un modelo específico por locutor, de 15 iteraciones con 5 extras que incluyen estimación de Regresiones Lineales de Maxima Verosimilitud en el espacio de características (feature space Maximum Likelihood Linear Regression fMLLR)   
+
+\textbf{Evaluación}
+
+Para la evaluación de este alineador se utilizaron los corpus Buckeye \cite{PittTheReliability} que cuenta con 20.7 horas de grabaciones de 40 locutores distintos, anotado a nivel fonético y de palabras, también se usó el corpus Phonsay, el cual cuenta con 48 minutos de audio grabados en un ambiente de laboratorio no ruidoso donde tiene una plantilla de grabación cambiando una palabra por otra de sonoridad similar, ambos para idioma inglés.
+
+En la evaluación se muestra que para intérvalos de 10 ms, la tolerancia de alineación es de cerca del 35\%, pero ampliando la ventana a 50 ms la tolerancia sube valores cercanos al 90\%, superando los valores reportados por FAVE\cite{Rosenfelder2014FAVE:Suite} y Prosodylab \cite{Gorman2011Prosodylab-aligner:Speech}
+
+
