@@ -1,20 +1,34 @@
 \chapter{Metodología}
 
 
-Para lograr cada objetivo específico propuesto para este trabajo, se inicia con una exploración a la literatura académica de publicaciones relacionada con alineadores forzados y sus aplicaciones para mejorar el nivel de anotación de corpus hablados, estudiando los principios propuestos, implementación y relevancia en el presente. Para esta etapa se estiman dos meses de trabajo.
+Para lograr cada objetivo específico propuesto para este trabajo se propone un desarrollo de cinco etapas donde la finalización de cada etapa cumplirá con un objetivo específico.
 
-Finalizada la etapa de reconocimiento teórico de herramientas se recolectarán recursos de licencias abiertas anotados en un nivel apropiado para evaluar el desempeño de los alineadores forzados, diseñando un corpus de prueba fonéticamente balanceado para la lengua española. Se separá un mes para el estudio de estos alineadores forzados y la adecuación de ambiente locales para la prueba de cada herramienta y evaluación con respecto a los corpus existentes y abiertos para la lengua española. 
+\section{Reconocimiento teórico}
+ Se inicia con una exploración a la literatura académica de publicaciones relacionada con alineadores forzados y sus aplicaciones para mejorar el nivel de anotación de corpus hablados, estudiando los principios propuestos, implementación y relevancia en el presente. Para esta etapa se estiman dos meses de trabajo.
+ 
+ Se estudiarán aplicaciones teóricas así como implementaciones publicadas bajo licencia abierta, estas implementaciones serán estudiadas y clasificadas según la técnica de alineación utilizada
 
-Con estas dos etapas se termina el análisis del primer objetivo específico donde se tendrá un análisis del estado actual del arte realizando un análisis detallado de cada aproximación teórica y las implementaciones abiertas de las mismas.
+\section{Recolección de recursos de licencia abierta}
+Finalizada la etapa de reconocimiento teórico de herramientas se recolectarán recursos hablados de licencias abiertas anotados y no anotados, que cumplan características apropiadas para ser procesados, incluyendo que sean de único locutor, su dicción sea clara y no estén en ambientes ruidosos. 
 
-Continuando con el proceso de recolección y análisis del arte, se explorarán los corpus existentes anotados, hablados y de licencia abierta para la lengua española, caracterizándolos en función de su nivel de anotación, el ambiente, la cantidad de locutores, la cantidad de palabras y el tamaño de cada sentencia, para obtener al final de esta etapa un compendio de recursos para realizar pruebas sobre anotaciones mas finas realizadas a los mismos recursos.
+En caso de ser recursos anotados a nivel de palabras o fonético, se evaluará la anotación respectiva con las implementaciones abiertas estudiadas.
+
+También se caracterizarán los recursos abiertos en función de su duración, el nivel de anotación y cantidad de locutores.
 
 Si la licencia de los corpus lo permite, al final de esta etapa se tendrá de igual manera un repositorio espejo con los corpus abiertos para un fácil acceso, en los casos donde no sea posible alojar públicamente los datos, se dejará un enlace a la fuente autorizada para las posteriores descargas.
 
-Iniciando la tercera etapa del proyecto, se tomarán tres meses para realizar una implentación de un alineador forzado para la lengua española, tomando como base las aproximaciones teóricas encontradas en la fase uno, utilizando metodologías iterativas, buscando en primera instancia el la segmentación de frases de un único locutor a nivel de palabras y luego fonemas, seguido por la segmentación a nivel de palabras independiente de locutor y luego la segmentación fonética y finalizando, una segmentación fonética independiente de locutor en ambientes ruidosos.
+\section{Construcción de un corpus de pruebas}
+Para evaluar el desempeño del alineador forzado que se construirá y utilizando los recursos abiertos y anotados a nivel fonético, se diseñará un corpus de prueba fonéticamente balanceado para la lengua española. Este corpus de prueba constará de recursos anotados existentes y de licencia abierta así como un conjunto de prueba anotado manualmente para la verificación, considerando situaciones como el cambio de ruido en el ambiente y alófonos.
 
-Esta etapa dejará código fuente con la implementación del alineador diiseñado, dejando el trabajo alojado en fuentes públicas para el trabajo e investigación posterior.
+Este corpus será liberado bajo licencias abiertas.
 
-Por último, se usará el alineador de la etapa tres para anotar en un nivel de palabra y fonético un corpus de gran vocabulario para el idioma español, diseñando e implementando herramientas para la verificación automática del alineamiento y los ajustes pertinentes de ser necesarios. Además de eso, se realizará verificación manual aleatoria del corpus generado para verificar su calidad.
+\section{Implementación del alineador forzado}
+Con el análisis de las herramientas para la anotación automática de recursos hablados, se dará inicio a la implentación de un alineador forzado para la lengua española, tomando como base las aproximaciones teóricas encontradas en la primera fase, utilizando metodologías iterativas, buscando en primera instancia el la segmentación de frases de un único locutor a nivel de palabras, seguido por la segmentación a nivel de palabras independiente de locutor. 
+
+Esta etapa dejará código fuente con la implementación del alineador diseñado, dejando el trabajo alojado en fuentes públicas para el trabajo e investigación posterior.
+
+
+\section{Diseño de pruebas de nivel de anotación}
+Finalmente se diseñarán pruebas empíricas para determinar la precisión y eficacia del anotador, indicando su rendimiento en un nuevo corpus de gran vocabulario para la lengua española de licencia abierta.
 
 La anotación realizada al corpus se publicará bajo licencias abiertas para su posterior uso en otras investigaciones.
